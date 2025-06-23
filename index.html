@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDose | AI-Powered Biofertilizer Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">EcoDose</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>EcoDose</h1>
+            <p class="tagline">Smart Dosing. Better Soil. Greener Tomorrow.</p>
+            <button id="cta-btn">Get Your Recommendation</button>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="card">
+            <h2>What is EcoDose?</h2>
+            <p>
+                EcoDose is your AI-powered microbial biofertilizer assistant, designed to help farmers and agri-enthusiasts optimize crop yield using Rhizobium-based biofertilizers. By leveraging real-time pH and EC sensor data, EcoDose recommends the ideal dosage of biofertilizer beads (g/m²) for your unique soil and crop profile. 
+            </p>
+        </div>
+    </section>
+    <section class="form-section" id="form-section">
+        <form id="dose-form" class="card">
+            <h2>Get Your Dosage Recommendation</h2>
+            <div class="input-group">
+                <label for="ph"><span class="icon">🧪</span> pH Value</label>
+                <input type="number" id="ph" name="ph" step="0.01" min="3" max="10" required>
+            </div>
+            <div class="input-group">
+                <label for="ec"><span class="icon">⚡</span> EC Value (dS/m)</label>
+                <input type="number" id="ec" name="ec" step="0.01" min="0" max="10" required>
+            </div>
+            <div class="input-group">
+                <label for="soil"><span class="icon">🌱</span> Soil Type</label>
+                <select id="soil" name="soil" required>
+                    <option value="">Select</option>
+                    <option value="Sandy">Sandy</option>
+                    <option value="Loamy">Loamy</option>
+                    <option value="Clayey">Clayey</option>
+                    <option value="Silty">Silty</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="crop"><span class="icon">🌾</span> Crop Type</label>
+                <select id="crop" name="crop" required>
+                    <option value="">Select</option>
+                    <option value="Tomato">Tomato</option>
+                    <option value="Chickpea">Chickpea</option>
+                    <option value="Wheat">Wheat</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Maize">Maize</option>
+                    <option value="Soybean">Soybean</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Calculate Dosage</button>
+        </form>
+    </section>
+    <section class="result-section" id="result-section" style="display:none;">
+        <div class="card result-card">
+            <h2>Recommended Dosage</h2>
+            <div class="dosage-value">
+                <span id="dosage-counter">0</span> <span class="unit">g/m²</span>
+            </div>
+            <div class="success-message">Optimal dosage calculated for your soil and crop!</div>
+            <div class="bar-container">
+                <div class="bar" id="dosage-bar"></div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <span>EcoDose &copy; 2025 | Built by an aspiring god-tier developer 🚀</span>
+            <form class="contact-form">
+                <input type="email" placeholder="Your email (for updates)" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
