@@ -269,6 +269,104 @@ input:focus, select:focus {
     border: 1.5px solid #588157;
     outline: none;
 }
+.about-card h2 {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: #3a5a40;
+    margin-bottom: 0.7rem;
+}
+.about-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+.about-card h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #588157;
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+.about-divider {
+    border: none;
+    border-top: 2px solid #e6e2d3;
+    margin: 1rem 0 1.2rem 0;
+}
+.about-cards-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: 2.5rem auto 2rem auto;
+    max-width: 1200px;
+}
+.about-card-mini {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px #3a5a4011;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    flex: 1 1 300px;
+    min-width: 270px;
+    max-width: 370px;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.about-card-mini:hover {
+    box-shadow: 0 8px 32px #3a5a4022;
+    transform: translateY(-4px) scale(1.03);
+}
+.about-card-mini h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    color: #588157;
+    margin-bottom: 0.7rem;
+}
+.about-card-mini .about-icon {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+}
+.about-vision {
+    background: #f7f3ed;
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    box-shadow: 0 2px 8px #58815711;
+}
+.about-vision ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+}
+.about-vision li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+}
+.about-commitment {
+    color: #3a5a40;
+    font-weight: 600;
+    margin-top: 0.7rem;
+    font-size: 1rem;
+}
+@media (max-width: 900px) {
+    .about-cards-container {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: center;
+    }
+    .about-card-mini {
+        max-width: 95vw;
+        min-width: 0;
+    }
+}
 @media (max-width: 700px) {
     .navbar {
         flex-direction: column;
