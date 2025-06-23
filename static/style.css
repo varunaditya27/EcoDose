@@ -256,6 +256,19 @@ input:focus, select:focus {
     background: #f7f3ed;
     text-align: center;
 }
+.input-group select#model {
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #b7b7b7;
+    font-size: 1rem;
+    background: #f7f3ed;
+    margin-top: 0.1rem;
+    transition: border 0.2s;
+}
+.input-group select#model:focus {
+    border: 1.5px solid #588157;
+    outline: none;
+}
 @media (max-width: 700px) {
     .navbar {
         flex-direction: column;
