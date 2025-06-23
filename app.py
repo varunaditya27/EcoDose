@@ -7,13 +7,22 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Load the model at startup
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'random_forest_model.pkl')
+# Load both models at startup
+MODEL_DIR = os.path.join(os.path.dirname(__file__), 'models')
+RF_MODEL_PATH = os.path.join(MODEL_DIR, 'random_forest_model.pkl')
+LIN_MODEL_PATH = os.path.join(MODEL_DIR, 'linear_model.pkl')
+
+models = {}
 try:
-    model = joblib.load(MODEL_PATH)
+    models['random_forest'] = joblib.load(RF_MODEL_PATH)
 except Exception as e:
-    model = None
-    print(f"Model loading failed: {e}")
+    models['random_forest'] = None
+    print(f"Random Forest model loading failed: {e}")
+try:
+    models['linear'] = joblib.load(LIN_MODEL_PATH)
+except Exception as e:
+    models['linear'] = None
+    print(f"Linear model loading failed: {e}")
 
 @app.route('/')
 def index():
@@ -21,12 +30,14 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if not model:
-        return jsonify({'error': 'Model not loaded'}), 500
     data = request.get_json()
     required = ['pH', 'moisture', 'nitrogen', 'phosphorus', 'potassium']
     if not data or not all(k in data for k in required):
         return jsonify({'error': 'Missing input fields'}), 400
+    model_type = data.get('model', 'random_forest')
+    model = models.get(model_type)
+    if not model:
+        return jsonify({'error': f'Model "{model_type}" not loaded'}), 500
     try:
         features = [
             float(data['pH']),
