@@ -48,7 +48,8 @@ def predict():
         ]
         X = np.array([features])
         dosage = model.predict(X)[0]
-        return jsonify({'dosage': float(dosage)})
+        # Round the dosage to 2 decimal places
+        return jsonify({'dosage': round(float(dosage), 2)})
     except Exception as e:
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
 
