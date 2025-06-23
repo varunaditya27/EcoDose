@@ -35,33 +35,25 @@
         <form id="dose-form" class="card">
             <h2>Get Your Dosage Recommendation</h2>
             <div class="input-group">
-                <label for="ph"><span class="icon">🧪</span> pH Value</label>
+                <label for="ph"><span class="icon">🧪</span> Soil pH</label>
                 <input type="number" id="ph" name="ph" step="0.01" min="3" max="10" required>
             </div>
             <div class="input-group">
-                <label for="ec"><span class="icon">⚡</span> EC Value (dS/m)</label>
-                <input type="number" id="ec" name="ec" step="0.01" min="0" max="10" required>
+                <label for="moisture"><span class="icon">💧</span> Soil Moisture Level (%)</label>
+                <input type="number" id="moisture" name="moisture" step="0.1" min="0" max="100" required>
             </div>
             <div class="input-group">
-                <label for="soil"><span class="icon">🌱</span> Soil Type</label>
-                <select id="soil" name="soil" required>
-                    <option value="">Select</option>
-                    <option value="Sandy">Sandy</option>
-                    <option value="Loamy">Loamy</option>
-                    <option value="Clayey">Clayey</option>
-                    <option value="Silty">Silty</option>
-                </select>
+                <label><span class="icon">🧬</span> NPK Levels (mg/kg)</label>
+                <div class="npk-group">
+                    <input type="number" id="n" name="n" placeholder="N" min="0" required>
+                    <input type="number" id="p" name="p" placeholder="P" min="0" required>
+                    <input type="number" id="k" name="k" placeholder="K" min="0" required>
+                </div>
             </div>
             <div class="input-group">
                 <label for="crop"><span class="icon">🌾</span> Crop Type</label>
                 <select id="crop" name="crop" required>
-                    <option value="">Select</option>
                     <option value="Tomato">Tomato</option>
-                    <option value="Chickpea">Chickpea</option>
-                    <option value="Wheat">Wheat</option>
-                    <option value="Rice">Rice</option>
-                    <option value="Maize">Maize</option>
-                    <option value="Soybean">Soybean</option>
                 </select>
             </div>
             <button type="submit" class="submit-btn">Calculate Dosage</button>
@@ -73,7 +65,7 @@
             <div class="dosage-value">
                 <span id="dosage-counter">0</span> <span class="unit">g/m²</span>
             </div>
-            <div class="success-message">Optimal dosage calculated for your soil and crop!</div>
+            <div class="success-message">Optimal dosage calculated for your soil!</div>
             <div class="bar-container">
                 <div class="bar" id="dosage-bar"></div>
             </div>

@@ -1,11 +1,19 @@
 // Demo sensor values (replace with real sensor data in production)
 let phValue = 6.8;
-let ecValue = 1.2;
+let moistureValue = 22.5;
+let nValue = 80;
+let pValue = 40;
+let kValue = 60;
+let cropValue = 'Tomato';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Autofill sensor values
     document.getElementById('ph').value = phValue;
-    document.getElementById('ec').value = ecValue;
+    document.getElementById('moisture').value = moistureValue;
+    document.getElementById('n').value = nValue;
+    document.getElementById('p').value = pValue;
+    document.getElementById('k').value = kValue;
+    document.getElementById('crop').value = cropValue;
 
     // CTA button scrolls to form
     document.getElementById('cta-btn').addEventListener('click', () => {
@@ -16,21 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dose-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const ph = parseFloat(document.getElementById('ph').value);
-        const ec = parseFloat(document.getElementById('ec').value);
-        const soil = document.getElementById('soil').value;
+        const moisture = parseFloat(document.getElementById('moisture').value);
+        const n = parseFloat(document.getElementById('n').value);
+        const p = parseFloat(document.getElementById('p').value);
+        const k = parseFloat(document.getElementById('k').value);
         const crop = document.getElementById('crop').value;
         // Simple AI-inspired logic for demo (replace with real ML model in production)
         let base = 20;
-        if (soil === 'Sandy') base -= 2;
-        if (soil === 'Clayey') base += 2;
-        if (crop === 'Chickpea') base += 1.5;
+        base += (7 - ph) * 0.7;
+        base += (30 - moisture) * 0.15;
+        base += (100 - n) * 0.05;
+        base += (60 - p) * 0.04;
+        base += (80 - k) * 0.03;
         if (crop === 'Tomato') base += 1;
-        if (crop === 'Wheat') base += 0.5;
-        if (crop === 'Rice') base += 1.2;
-        if (crop === 'Maize') base += 0.8;
-        if (crop === 'Soybean') base += 1.1;
-        base += (7 - ph) * 0.8;
-        base += (2 - ec) * 1.2;
         const dosage = Math.max(8, Math.round(base * 10) / 10);
         showResult(dosage);
     });

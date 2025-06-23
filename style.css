@@ -242,6 +242,20 @@ input:focus, select:focus {
 .contact-form button:hover {
     background: #3a5a40;
 }
+.input-group .npk-group {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 0.3rem;
+}
+.input-group .npk-group input {
+    width: 60px;
+    padding: 0.7rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #b7b7b7;
+    font-size: 1rem;
+    background: #f7f3ed;
+    text-align: center;
+}
 @media (max-width: 700px) {
     .navbar {
         flex-direction: column;
