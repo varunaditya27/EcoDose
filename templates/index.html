@@ -59,7 +59,7 @@
             <div class="input-group">
                 <label for="model"><span class="icon">🤖</span> Prediction Model</label>
                 <select id="model" name="model" required>
-                    <option value="random_forest">Random Forest (AI)</option>
+                    <option value="random_forest">Random Forest</option>
                     <option value="linear">Linear Regression</option>
                 </select>
             </div>
@@ -78,15 +78,6 @@
             </div>
         </div>
     </section>
-    <footer class="footer" id="contact">
-        <div class="footer-content">
-            <span>EcoDose &copy; 2025 | Built by an aspiring god-tier developer 🚀</span>
-            <form class="contact-form">
-                <input type="email" placeholder="Your email (for updates)" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
