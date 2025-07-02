@@ -385,3 +385,70 @@ input:focus, select:focus {
         padding: 1.2rem 0.2rem;
     }
 }
+
+/* --- Enhanced About Section Styles --- */
+.about-expanded-container {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #3a5a4011;
+    padding: 2.5rem 2rem;
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+.about-expanded-container h2 {
+    color: #3a5a40;
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+    margin-top: 0;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.about-expanded-container p, .about-expanded-container ul {
+    font-size: 1.13rem;
+    color: #2e3d27;
+    line-height: 1.7;
+    margin-bottom: 0.7rem;
+}
+.about-expanded-container ul {
+    padding-left: 1.3rem;
+    margin-bottom: 0.7rem;
+}
+.about-expanded-container ul.team-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+.about-expanded-container ul.team-list li {
+    background: #f7f3ed;
+    border-left: 5px solid #588157;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    font-size: 1.08rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px #58815711;
+}
+.about-expanded-container blockquote {
+    background: #e6e2d3;
+    border-left: 5px solid #3a5a40;
+    margin: 1.2rem 0;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    color: #3a5a40;
+    border-radius: 8px;
+    font-size: 1.08rem;
+}
+@media (max-width: 900px) {
+    .about-expanded-container {
+        padding: 1.2rem 0.5rem;
+    }
+}
