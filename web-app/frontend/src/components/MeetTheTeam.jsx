@@ -46,7 +46,7 @@ const teamMembers = [
 ];
 
 const MeetTheTeam = () => (
-  <section className="team-section" id="team">
+  <section className="team-section">
     <h2>👥 Meet the Team</h2>
     <p className="team-intro">
       We're a 5-member interdisciplinary crew from RVCE, combining biology, AI, electronics, and software to rethink how sustainable farming works — from lab to land.
