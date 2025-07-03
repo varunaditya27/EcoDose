@@ -84,21 +84,26 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
 
   return (
     <>
-      <button
-        className={`chatbot-fab${enabled ? '' : ' chatbot-fab-disabled'}`}
-        onClick={() => enabled && setOpen(true)}
-        onMouseEnter={() => !enabled && setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        disabled={!enabled}
-        aria-label="Open EcoDose Assistant"
-        style={{ position: 'fixed', bottom: '2.5rem', right: '2.5rem', zIndex: 200 }}
-      >
-        <span role="img" aria-label="chat">💬</span>
-      </button>
-      {showTooltip && (
-        <div className="chatbot-tooltip" style={{ position: 'fixed', bottom: '5.2rem', right: '2.5rem', background: '#333', color: '#fff', padding: '0.7rem 1.1rem', borderRadius: '8px', fontSize: '1rem', zIndex: 201 }}>
-          Enter soil data to unlock the EcoDose Assistant.
-        </div>
+      {/* Only show FAB and tooltip when sidebar is not open */}
+      {!open && (
+        <>
+          <button
+            className={`chatbot-fab${enabled ? '' : ' chatbot-fab-disabled'}`}
+            onClick={() => enabled && setOpen(true)}
+            onMouseEnter={() => !enabled && setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            disabled={!enabled}
+            aria-label="Open EcoDose Assistant"
+            style={{ position: 'fixed', bottom: '2.5rem', right: '2.5rem', zIndex: 200 }}
+          >
+            <span role="img" aria-label="chat">💬</span>
+          </button>
+          {showTooltip && (
+            <div className="chatbot-tooltip" style={{ position: 'fixed', bottom: '5.2rem', right: '2.5rem', background: '#333', color: '#fff', padding: '0.7rem 1.1rem', borderRadius: '8px', fontSize: '1rem', zIndex: 201 }}>
+              Enter soil data to unlock the EcoDose Assistant.
+            </div>
+          )}
+        </>
       )}
       {/* Sidebar and overlay */}
       {open && enabled && (
