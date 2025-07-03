@@ -72,6 +72,7 @@ def chat():
     context_parts = []
     if soil_data:
         context_parts.append("Soil data: " + ', '.join(f"{k}: {v}" for k, v in soil_data.items()))
+        context_parts.append("(N, P, K values are in mg/kg of soil)")
     if history:
         context_parts.append("Chat history: " + ' | '.join(f"{m['role']}: {m['content']}" for m in history[-6:]))
     context_str = '\n'.join(context_parts)
@@ -119,7 +120,7 @@ def soil_feedback():
     # Compose prompt for Gemini
     prompt = f"""
     You are EcoDose Assistant — a soil and biofertilizer expert built for Indian farms. 
-    You’ve been given live soil data for a small to mid-sized plot.
+    You've been given live soil data for a small to mid-sized plot.
 
     Your task: 
     🧪 Provide short, practical feedback based on this soil profile.
@@ -128,6 +129,7 @@ def soil_feedback():
 
     Soil Data:
     {', '.join(f'{k}: {v}' for k, v in soil_data.items())}
+    (N, P, K values are in mg/kg of soil)
 
     Respond in 2-4 sentences, as if speaking to a farmer or agri-enthusiast.
     Begin directly with feedback, no greeting or sign-off.
