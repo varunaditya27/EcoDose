@@ -4,6 +4,7 @@ import joblib
 import numpy as np
 import os
 import google.generativeai as genai
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +26,11 @@ except Exception as e:
     models['linear'] = None
     print(f"Linear model loading failed: {e}")
 
-GEMINI_API_KEY = "AIzaSyDLgv-OO6JXp0dM6_YbzMIugzllQj7LQLM"
+load_dotenv()
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise RuntimeError("GEMINI_API_KEY not set in environment or .env file.")
 genai.configure(api_key=GEMINI_API_KEY)
 
 @app.route('/')
