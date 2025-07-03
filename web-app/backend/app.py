@@ -3,7 +3,7 @@ from flask_cors import CORS
 import joblib
 import numpy as np
 import os
-import requests
+import google.generativeai as genai
 
 app = Flask(__name__)
 CORS(app)
@@ -26,7 +26,7 @@ except Exception as e:
     print(f"Linear model loading failed: {e}")
 
 GEMINI_API_KEY = "AIzaSyDLgv-OO6JXp0dM6_YbzMIugzllQj7LQLM"
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + GEMINI_API_KEY
+genai.configure(api_key=GEMINI_API_KEY)
 
 @app.route('/')
 def index():
@@ -82,15 +82,9 @@ User: {user_message}
 EcoDose Assistant:"""
 
     try:
-        gemini_payload = {
-            "contents": [
-                {"parts": [{"text": prompt}]}
-            ]
-        }
-        resp = requests.post(GEMINI_API_URL, json=gemini_payload, timeout=15)
-        resp.raise_for_status()
-        gemini_data = resp.json()
-        reply = gemini_data.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text')
+        model = genai.GenerativeModel("gemini-pro")
+        response = model.generate_content(prompt)
+        reply = response.text if hasattr(response, 'text') else None
         if not reply:
             reply = "Sorry, I couldn't generate a response."
         return jsonify({'reply': reply})
