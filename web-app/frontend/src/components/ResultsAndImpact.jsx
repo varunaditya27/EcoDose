@@ -1,19 +1,43 @@
 import React from 'react';
 
 const ResultsAndImpact = () => (
-  <div className="about-card">
+  <div className="about-card results-impact">
     <h2>🚀 Results & Impact</h2>
+
     <p>
-      EcoDose has already made a measurable difference in the way biofertilizer dosing is approached. Our models and system have been tested and validated in both simulated and real-world conditions.
+      EcoDose isn’t just a concept — it’s a working system that has demonstrated strong performance across simulation and initial test environments. Here’s what we’ve achieved so far:
     </p>
-    <ul>
-      <li><b>Model Accuracy:</b> R² = 0.85, MAE ≈ 4.42 g/m²</li>
-      <li>Real-time sensors for pH and moisture calibrated to match training data</li>
-      <li>UI/UX designed for ease of use by farmers and agri students</li>
-      <li>Strong interest from professors and agri-tech experts at RVCE</li>
+
+    <h4>📈 Model Performance</h4>
+    <ul className="custom-list">
+      <li><span className="list-title">R² Score:</span> 0.85 — strong correlation between predicted and optimal dosage</li>
+      <li><span className="list-title">MAE:</span> ~4.42 g/m² — low average prediction error for dosage</li>
     </ul>
-    <blockquote style={{fontWeight:600, fontSize:'1.1rem', color:'#3a5a40', borderLeft:'5px solid #588157'}}>“EcoDose represents the kind of AI we actually need in agri-tech.”<br /><span style={{fontWeight:400, fontSize:'1rem'}}>– RVCE Faculty (Anonymous)</span></blockquote>
+
+    <h4>🔧 System Calibration</h4>
+    <ul className="custom-list">
+      <li>pH and moisture sensors calibrated to reflect dataset input distribution</li>
+      <li>Analog data mapped and constrained to training data ranges</li>
+    </ul>
+
+    <h4>🧑‍🌾 Human-Centered Design</h4>
+    <ul className="custom-list">
+      <li>Clean, intuitive UI/UX optimized for farmers and agri students</li>
+      <li>Multi-model option for explainability (Linear vs. Random Forest)</li>
+    </ul>
+
+    <h4>🏫 Institutional Backing</h4>
+    <ul className="custom-list">
+      <li>Positive reception from RVCE faculty, biotech advisors, and agri-tech mentors</li>
+      <li>Potential for pilot collaboration in future semesters</li>
+    </ul>
+
+    <blockquote className="eco-quote">
+      “EcoDose represents the kind of AI we actually need in agri-tech.”
+      <br />
+      <span className="eco-quote-source">– RVCE Faculty (Anonymous)</span>
+    </blockquote>
   </div>
 );
 
-export default ResultsAndImpact; 
+export default ResultsAndImpact;
