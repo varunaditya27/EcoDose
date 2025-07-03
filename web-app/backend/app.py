@@ -3,6 +3,7 @@ from flask_cors import CORS
 import joblib
 import numpy as np
 import os
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -23,6 +24,9 @@ try:
 except Exception as e:
     models['linear'] = None
     print(f"Linear model loading failed: {e}")
+
+GEMINI_API_KEY = "AIzaSyDLgv-OO6JXp0dM6_YbzMIugzllQj7LQLM"
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + GEMINI_API_KEY
 
 @app.route('/')
 def index():
@@ -60,18 +64,46 @@ def chat():
     soil_data = data.get('soil_data', {})
     history = data.get('history', [])
 
-    # Simple rule-based or echo response for now
     if not user_message:
         return jsonify({'reply': "Please enter a message."}), 400
 
-    # Example: Use soil data in the response
-    soil_str = ', '.join(f"{k}: {v}" for k, v in soil_data.items()) if soil_data else "(no soil data)"
-    reply = (
-        f"You said: '{user_message}'.\n"
-        f"Current soil data: {soil_str}.\n"
-        f"(This is a demo response. In production, this would use an AI model or LLM.)"
-    )
-    return jsonify({'reply': reply})
+    # Compose context for Gemini
+    context_parts = []
+    if soil_data:
+        context_parts.append("Soil data: " + ', '.join(f"{k}: {v}" for k, v in soil_data.items()))
+    if history:
+        context_parts.append("Chat history: " + ' | '.join(f"{m['role']}: {m['content']}" for m in history[-6:]))
+    context_str = '\n'.join(context_parts)
+
+    prompt = f"""
+You are EcoDose Assistant, an expert in soil science, biofertilizers, and sustainable agriculture. Use the provided soil data and chat history to answer user questions helpfully and concisely.
+{context_str}
+User: {user_message}
+EcoDose Assistant:"""
+
+    try:
+        gemini_payload = {
+            "contents": [
+                {"parts": [{"text": prompt}]}
+            ]
+        }
+        resp = requests.post(GEMINI_API_URL, json=gemini_payload, timeout=15)
+        resp.raise_for_status()
+        gemini_data = resp.json()
+        reply = gemini_data.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text')
+        if not reply:
+            reply = "Sorry, I couldn't generate a response."
+        return jsonify({'reply': reply})
+    except Exception as e:
+        # Fallback to demo response
+        soil_str = ', '.join(f"{k}: {v}" for k, v in soil_data.items()) if soil_data else "(no soil data)"
+        reply = (
+            f"[Gemini error: {e}]\n"
+            f"You said: '{user_message}'.\n"
+            f"Current soil data: {soil_str}.\n"
+            f"(This is a fallback response.)"
+        )
+        return jsonify({'reply': reply})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
