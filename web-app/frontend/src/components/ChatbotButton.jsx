@@ -1,7 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: 'Hi! I am the EcoDose Assistant. Ask me anything about your soil, biofertilizer, or recommendations.' }
+  ]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (open && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, open]);
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    const userMsg = { role: 'user', content: input };
+    setMessages((msgs) => [...msgs, userMsg]);
+    setInput('');
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:5001/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: input,
+          soil_data: soilData,
+          history: messages.filter(m => m.role === 'user' || m.role === 'assistant'),
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.reply) {
+        setMessages((msgs) => [...msgs, { role: 'assistant', content: data.reply }]);
+      } else {
+        setMessages((msgs) => [...msgs, { role: 'assistant', content: 'Sorry, I could not process your request.' }]);
+      }
+    } catch (err) {
+      setMessages((msgs) => [...msgs, { role: 'assistant', content: 'Network error. Please try again.' }]);
+    }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -23,12 +64,29 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
       )}
       {open && enabled && (
         <div className="chatbot-modal">
-          {/* Chatbot UI goes here. Soil data: {JSON.stringify(soilData)} */}
           <div className="chatbot-modal-content">
             <button className="chatbot-modal-close" onClick={() => setOpen(false)}>&times;</button>
             <h3>EcoDose Assistant</h3>
-            <p style={{ fontSize: '0.95rem', color: '#666' }}>Soil data: {JSON.stringify(soilData)}</p>
-            <div style={{ marginTop: '2rem', color: '#aaa' }}>[Chatbot UI coming soon]</div>
+            <div className="chatbot-messages">
+              {messages.map((msg, i) => (
+                <div key={i} className={`chatbot-msg chatbot-msg-${msg.role}`}>{msg.content}</div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+            <form className="chatbot-input-row" onSubmit={sendMessage}>
+              <input
+                className="chatbot-input"
+                type="text"
+                placeholder="Type your question..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                disabled={loading}
+                autoFocus
+              />
+              <button className="chatbot-send-btn" type="submit" disabled={loading || !input.trim()}>
+                {loading ? '...' : 'Send'}
+              </button>
+            </form>
           </div>
         </div>
       )}
