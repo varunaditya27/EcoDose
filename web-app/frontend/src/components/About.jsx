@@ -13,8 +13,8 @@ const About = () => (
       <div className="intro-card">
       <h2>📚 Project Overview</h2>
         <p>
-          EcoDose is a full-stack solution that bridges biotechnology and AI to solve one of agriculture’s most overlooked challenges: optimizing biofertilizer application. 
-          Developed as part of RVCE’s <strong>Experiential Learning program</strong>, our system blends real-time sensor data, machine learning predictions, and user-friendly design into one platform.
+          EcoDose is a full-stack solution that bridges biotechnology and AI to solve one of agriculture's most overlooked challenges: optimizing biofertilizer application. 
+          Developed as part of RVCE's <strong>Experiential Learning program</strong>, our system blends real-time sensor data, machine learning predictions, and user-friendly design into one platform.
         </p>
         <p>
           By leveraging real-time soil input such as <strong>pH</strong>, <strong>moisture</strong>, and <strong>NPK levels</strong>, 
@@ -25,13 +25,13 @@ const About = () => (
         </p>
       </div>
 
-      <MeetTheTeam />
-      <HowEcoDoseWorks />
-      <ResultsAndImpact />
-      <WhatsNext />
-      <WhatIsRhizobium />
-      <WhyDosageMatters />
-      <WhyUseAI />
+      <div id="team"><MeetTheTeam /></div>
+      <div id="how-ecodose-works"><HowEcoDoseWorks /></div>
+      <div id="results-impact"><ResultsAndImpact /></div>
+      <div id="whats-next"><WhatsNext /></div>
+      <div id="what-is-rhizobium"><WhatIsRhizobium /></div>
+      <div id="why-dosage-matters"><WhyDosageMatters /></div>
+      <div id="why-ai"><WhyUseAI /></div>
     </div>
   </section>
 );
