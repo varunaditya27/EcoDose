@@ -621,3 +621,25 @@ section {
     max-width: 98vw;
   }
 }
+
+.intro-card {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.intro-card h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.intro-card p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
