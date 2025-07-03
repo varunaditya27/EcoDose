@@ -87,7 +87,7 @@ User: {user_message}
 EcoDose Assistant:"""
 
     try:
-        model = genai.GenerativeModel("gemini-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt)
         reply = response.text if hasattr(response, 'text') else None
         if not reply:
