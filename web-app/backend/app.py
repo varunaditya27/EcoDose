@@ -53,5 +53,25 @@ def predict():
     except Exception as e:
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
 
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.get_json()
+    user_message = data.get('message', '')
+    soil_data = data.get('soil_data', {})
+    history = data.get('history', [])
+
+    # Simple rule-based or echo response for now
+    if not user_message:
+        return jsonify({'reply': "Please enter a message."}), 400
+
+    # Example: Use soil data in the response
+    soil_str = ', '.join(f"{k}: {v}" for k, v in soil_data.items()) if soil_data else "(no soil data)"
+    reply = (
+        f"You said: '{user_message}'.\n"
+        f"Current soil data: {soil_str}.\n"
+        f"(This is a demo response. In production, this would use an AI model or LLM.)"
+    )
+    return jsonify({'reply': reply})
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
