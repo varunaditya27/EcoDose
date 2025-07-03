@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaHome, FaFlask, FaInfoCircle, FaRobot, FaBars, FaLeaf, FaUsers, FaCogs, FaChartBar, FaLightbulb, FaSeedling, FaQuestionCircle, FaBrain } from 'react-icons/fa';
 import './Sidebar.css';
 
@@ -9,18 +9,54 @@ const navLinks = [
   { href: '#about', label: 'Project Overview', icon: <FaInfoCircle /> },
   { href: '#team', label: 'Meet the Team', icon: <FaUsers /> },
   { href: '#how-ecodose-works', label: 'How EcoDose works', icon: <FaCogs /> },
-  { href: '#results-impact', label: "Results & Impact", icon: <FaChartBar /> },
+  { href: '#results-impact', label: 'Results & Impact', icon: <FaChartBar /> },
   { href: '#whats-next', label: "What's Next", icon: <FaLightbulb /> },
   { href: '#what-is-rhizobium', label: 'What is Rhizobium', icon: <FaLeaf /> },
   { href: '#why-dosage-matters', label: 'Why does dosage matter', icon: <FaQuestionCircle /> },
   { href: '#why-ai', label: 'Why use AI', icon: <FaBrain /> },
 ];
 
+const sectionIds = navLinks.map(link => link.href.replace('#', ''));
+
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const observerRef = useRef(null);
 
-  // Determine active link by hash
-  const activeHash = typeof window !== 'undefined' ? window.location.hash : '';
+  useEffect(() => {
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+    let prevRatio = 0;
+    observerRef.current = new window.IntersectionObserver(
+      (entries) => {
+        // Find the entry with the largest intersection ratio
+        let maxRatio = 0;
+        let visibleId = 'home';
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            visibleId = entry.target.id;
+          }
+        });
+        setActiveSection(visibleId);
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -60% 0px', // triggers when section is 40% from top
+        threshold: Array.from({length: 21}, (_, i) => i * 0.05),
+      }
+    );
+    sections.forEach(section => {
+      observerRef.current.observe(section);
+    });
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -34,9 +70,10 @@ const Sidebar = () => {
             <a
               key={link.label}
               href={link.href}
-              className={`sidebar-link${activeHash === link.href ? ' active' : ''}`}
+              className={`sidebar-link${activeSection === link.href.replace('#', '') ? ' active' : ''}`}
               tabIndex={0}
-              aria-current={activeHash === link.href ? 'page' : undefined}
+              aria-current={activeSection === link.href.replace('#', '') ? 'page' : undefined}
+              onClick={() => setOpen(false)}
             >
               <span className="sidebar-link-icon">{link.icon}</span>
               <span className="sidebar-link-label">{link.label}</span>
