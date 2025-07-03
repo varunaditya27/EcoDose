@@ -1,0 +1,91 @@
+.team-section {
+    background-color: #f9fff9;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .team-section h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #2a3d2f;
+  }
+  
+  .team-intro {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .team-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .mini-card {
+    width: 240px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  .mini-photo {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .mini-info {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .mini-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: #2e4a30;
+  }
+  
+  .mini-info .dept {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .mini-info .role {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #3a5a40;
+    margin: 0.3rem 0;
+  }
+  
+  .mini-info .desc {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+  
+  /* LinkedIn Icon */
+  .linkedin-icon {
+    color: #0a66c2;
+    font-size: 1.3rem;
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  
+  .linkedin-icon:hover {
+    transform: scale(1.2);
+  }
+  
