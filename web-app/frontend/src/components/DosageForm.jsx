@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const DosageForm = ({ onResult, loading, setLoading }) => {
+const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
   const [form, setForm] = useState({
     ph: '',
     moisture: '',
@@ -10,6 +10,29 @@ const DosageForm = ({ onResult, loading, setLoading }) => {
     crop: 'Tomato',
     model: 'random_forest',
   });
+  const [showToast, setShowToast] = useState(false);
+  const [soilDataSaved, setSoilDataSaved] = useState(false);
+
+  useEffect(() => {
+    const allFilled = form.ph && form.moisture && form.n && form.p && form.k;
+    if (allFilled && !soilDataSaved) {
+      const soilData = {
+        ph: form.ph,
+        moisture: form.moisture,
+        nitrogen: form.n,
+        phosphorus: form.p,
+        potassium: form.k,
+      };
+      localStorage.setItem('ecodose_soil_data', JSON.stringify(soilData));
+      setShowToast(true);
+      setSoilDataSaved(true);
+      if (onSoilDataComplete) onSoilDataComplete(soilData);
+      setTimeout(() => setShowToast(false), 2500);
+    }
+    if (!allFilled && soilDataSaved) {
+      setSoilDataSaved(false);
+    }
+  }, [form, soilDataSaved, onSoilDataComplete]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -79,6 +102,9 @@ const DosageForm = ({ onResult, loading, setLoading }) => {
         </div>
         <button type="submit" className="submit-btn" disabled={loading}>{loading ? 'Calculating...' : 'Calculate Dosage'}</button>
       </form>
+      {showToast && (
+        <div className="toast soil-toast">✅ Soil data saved. You can now chat with the EcoDose Assistant!</div>
+      )}
     </section>
   );
 };
