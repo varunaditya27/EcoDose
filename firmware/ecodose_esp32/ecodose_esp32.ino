@@ -1,11 +1,11 @@
 
 // EcoDose ESP32 Firmware - pH and Soil Moisture Sensor Integration
 
-#define SOIL_MOISTURE_PIN 34  // Analog pin for soil moisture
-#define PH_SENSOR_PIN 35      // Analog pin for pH sensor
+#define SOIL_MOISTURE_PIN 32  // Analog pin for soil moisture
+#define PH_SENSOR_PIN 34      // Analog pin for pH sensor
 
-#define DRY_VAL 3600          // Calibrated dry value for moisture sensor
-#define WET_VAL 1600          // Calibrated wet value for moisture sensor
+#define DRY_VAL 4095        // Dry value for moisture sensor
+#define WET_VAL 0         // Wet value for moisture sensor
 
 void setup() {
   Serial.begin(115200);
@@ -15,9 +15,8 @@ void loop() {
   int soilRaw = analogRead(SOIL_MOISTURE_PIN);
   int phRaw = analogRead(PH_SENSOR_PIN);
 
-  // Map soil moisture to percentage and constrain to model range
+  // Map soil moisture to percentage
   float soilMoisture = map(soilRaw, DRY_VAL, WET_VAL, 0, 100);
-  soilMoisture = constrain(soilMoisture, 10, 60);  // Based on training data
 
   // Convert pH analog reading to voltage, then estimate pH value
   float voltage = (phRaw / 4095.0) * 3.3;
@@ -26,10 +25,10 @@ void loop() {
 
   Serial.print("Soil Moisture: ");
   Serial.print(soilMoisture);
-  Serial.println(" %");
+  Serial.print(" %    ||    ");
 
-  Serial.print("pH Value: ");
-  Serial.println(pHValue);
+  //Serial.print("pH Value: ");
+  //Serial.println(pHValue);
 
   delay(2000);
 }
