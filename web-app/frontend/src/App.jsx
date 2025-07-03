@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
 import WhyEcoDose from './components/WhyEcoDose'
 import About from './components/About'
@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Sidebar />
       <Hero />
       <WhyEcoDose />
       <DosageForm onResult={handleDosageResult} loading={loading} setLoading={setLoading} onSoilDataComplete={handleSoilDataComplete} />
