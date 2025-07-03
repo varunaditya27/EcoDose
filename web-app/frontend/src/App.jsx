@@ -15,11 +15,41 @@ function App() {
   const [error, setError] = useState(null)
   const [soilData, setSoilData] = useState(null)
   const [chatbotOpen, setChatbotOpen] = useState(false)
+  const [aiFeedback, setAiFeedback] = useState(null)
+  const [aiFeedbackLoading, setAiFeedbackLoading] = useState(false)
 
-  const handleDosageResult = (result, err) => {
+  const handleDosageResult = async (result, err) => {
     setDosage(result)
     setError(err)
     setLoading(false)
+    setAiFeedback(null)
+    setAiFeedbackLoading(false)
+    if (result && soilData) {
+      setAiFeedbackLoading(true)
+      try {
+        const res = await fetch('http://localhost:5001/api/soil-feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pH: soilData.ph,
+            moisture: soilData.moisture,
+            nitrogen: soilData.nitrogen,
+            phosphorus: soilData.phosphorus,
+            potassium: soilData.potassium,
+          }),
+        });
+        const data = await res.json();
+        if (res.ok && data.feedback) {
+          setAiFeedback(data.feedback);
+        } else {
+          setAiFeedback('Could not fetch AI-based feedback.');
+        }
+        setAiFeedbackLoading(false)
+      } catch (e) {
+        setAiFeedback('Network error while fetching AI-based feedback.');
+        setAiFeedbackLoading(false)
+      }
+    }
   }
 
   const handleSoilDataComplete = (data) => {
@@ -38,7 +68,7 @@ function App() {
         open={chatbotOpen}
         setOpen={setChatbotOpen}
       />
-      <Result dosage={dosage} error={error} />
+      <Result dosage={dosage} error={error} aiFeedback={aiFeedback} aiFeedbackLoading={aiFeedbackLoading} />
       <About />
       <Footer />
     </>
