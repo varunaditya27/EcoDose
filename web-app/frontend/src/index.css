@@ -398,6 +398,44 @@ input:focus, select:focus {
   align-items: center;
   padding: 3rem 1rem 1.5rem 1rem;
 }
+.why-ai h4 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #3a3a3a;
+}
+
+.custom-list {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+  line-height: 1.7;
+  list-style: none;
+}
+
+.custom-list li {
+  position: relative;
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+}
+
+.custom-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.list-title {
+  font-weight: 600;
+  color: #222;
+}
+
+.future-note {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #555;
+}
+
 .why-ecodose-card {
   background: #fff;
   border-radius: 18px;
