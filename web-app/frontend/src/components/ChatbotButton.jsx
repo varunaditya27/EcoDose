@@ -8,12 +8,50 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const sidebarRef = useRef(null);
+
+  // Add/remove class to body for margin-right when sidebar is open
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add('chatbot-sidebar-open');
+    } else {
+      document.body.classList.remove('chatbot-sidebar-open');
+    }
+    return () => document.body.classList.remove('chatbot-sidebar-open');
+  }, [open]);
 
   useEffect(() => {
     if (open && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, open]);
+
+  // Trap focus in sidebar when open
+  useEffect(() => {
+    if (!open) return;
+    const focusable = sidebarRef.current?.querySelectorAll('input,button,[tabindex]:not([tabindex="-1"])');
+    if (focusable && focusable.length) focusable[0].focus();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Tab' && focusable && focusable.length) {
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open, setOpen]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -62,11 +100,16 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
           Enter soil data to unlock the EcoDose Assistant.
         </div>
       )}
+      {/* Sidebar and overlay */}
       {open && enabled && (
-        <div className="chatbot-modal">
-          <div className="chatbot-modal-content">
-            <button className="chatbot-modal-close" onClick={() => setOpen(false)}>&times;</button>
-            <h3>EcoDose Assistant</h3>
+        <>
+          {/* Overlay only on mobile */}
+          <div className="chatbot-sidebar-overlay" onClick={() => setOpen(false)} aria-hidden="true" />
+          <aside className="chatbot-sidebar" ref={sidebarRef} role="dialog" aria-modal="true" tabIndex={-1}>
+            <div className="chatbot-sidebar-header">
+              <h3>EcoDose Assistant</h3>
+              <button className="chatbot-sidebar-close" onClick={() => setOpen(false)} aria-label="Close chat">&times;</button>
+            </div>
             <div className="chatbot-messages">
               {messages.map((msg, i) => (
                 <div key={i} className={`chatbot-msg chatbot-msg-${msg.role}`}>{msg.content}</div>
@@ -87,8 +130,8 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
                 {loading ? '...' : 'Send'}
               </button>
             </form>
-          </div>
-        </div>
+          </aside>
+        </>
       )}
     </>
   );
