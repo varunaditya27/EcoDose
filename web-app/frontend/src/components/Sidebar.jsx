@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { FaHome, FaFlask, FaInfoCircle, FaRobot, FaBars, FaLeaf } from 'react-icons/fa';
+import { FaHome, FaFlask, FaInfoCircle, FaRobot, FaBars, FaLeaf, FaUsers, FaCogs, FaChartBar, FaLightbulb, FaSeedling, FaQuestionCircle, FaBrain } from 'react-icons/fa';
 import './Sidebar.css';
 
 const navLinks = [
   { href: '#home', label: 'Home', icon: <FaHome /> },
+  { href: '#why-ecodose', label: 'Why EcoDose', icon: <FaSeedling /> },
   { href: '#form-section', label: 'Dosage Recommendation', icon: <FaFlask /> },
-  { href: '#about', label: 'About', icon: <FaInfoCircle /> },
-  { href: '#', label: 'Assistant', icon: <FaRobot /> },
+  { href: '#about', label: 'Project Overview', icon: <FaInfoCircle /> },
+  { href: '#team', label: 'Meet the Team', icon: <FaUsers /> },
+  { href: '#how-ecodose-works', label: 'How EcoDose works', icon: <FaCogs /> },
+  { href: '#results-impact', label: "Results & Impact", icon: <FaChartBar /> },
+  { href: '#whats-next', label: "What's Next", icon: <FaLightbulb /> },
+  { href: '#what-is-rhizobium', label: 'What is Rhizobium', icon: <FaLeaf /> },
+  { href: '#why-dosage-matters', label: 'Why does dosage matter', icon: <FaQuestionCircle /> },
+  { href: '#why-ai', label: 'Why use AI', icon: <FaBrain /> },
 ];
 
 const Sidebar = () => {

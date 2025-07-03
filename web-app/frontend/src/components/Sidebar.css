@@ -13,6 +13,9 @@
   z-index: 1000;
   font-family: 'Montserrat', sans-serif;
   transition: transform 0.3s ease;
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-bottom: 2rem;
 }
 .sidebar-logo {
   display: flex;
