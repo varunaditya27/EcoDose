@@ -33,10 +33,6 @@ if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY not set in environment or .env file.")
 genai.configure(api_key=GEMINI_API_KEY)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
