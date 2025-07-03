@@ -85,28 +85,55 @@ button:focus-visible {
   align-items: center;
   padding: 1.2rem 2.5rem;
   background: #e6e2d3;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+  box-shadow: 0 2px 12px #3a5a4011, 0 1.5px 0 #d2e3c8;
   position: sticky;
   top: 0;
   z-index: 100;
+  min-height: 64px;
 }
 .logo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #3a5a40;
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #2e3d27;
   letter-spacing: 2px;
   text-shadow: 1px 2px 8px #b7b7b733;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 .navbar nav a {
   color: #3a5a40;
   text-decoration: none;
-  margin-left: 2rem;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: color 0.2s;
+  font-weight: 600;
+  font-size: 1.13rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
 }
-.navbar nav a:hover {
-  color: #588157;
+.navbar nav a:hover, .navbar nav a:focus {
+  color: #fff;
+  background: #588157;
+  outline: none;
+}
+.navbar nav a[aria-label="Open EcoDose Assistant"] {
+  background: #588157;
+  color: #fff;
+  margin-left: 0.7rem;
+  border-radius: 18px;
+  padding: 0.3rem 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px #58815722;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar nav a[aria-label="Open EcoDose Assistant"]:hover, .navbar nav a[aria-label="Open EcoDose Assistant"]:focus {
+  background: #3a5a40;
+  color: #fff;
 }
 .hero {
   background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
@@ -560,6 +587,17 @@ section {
 }
 
 @media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+    min-height: 48px;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .navbar nav {
+    gap: 1rem;
+  }
   .card, .about-card, .why-ecodose-card {
     padding: 1.2rem 0.5rem;
   }
