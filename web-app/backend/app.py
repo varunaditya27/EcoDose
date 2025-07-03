@@ -100,5 +100,34 @@ EcoDose Assistant:"""
         )
         return jsonify({'reply': reply})
 
+@app.route('/api/soil-feedback', methods=['POST'])
+def soil_feedback():
+    data = request.get_json()
+    required = ['pH', 'moisture', 'nitrogen', 'phosphorus', 'potassium']
+    if not data or not all(k in data for k in required):
+        return jsonify({'error': 'Missing input fields'}), 400
+    soil_data = {k: data[k] for k in required}
+    # Compose prompt for Gemini
+    prompt = f"""
+You are EcoDose Assistant, an expert in soil science, biofertilizers, and sustainable agriculture. Given the following soil data, provide a concise, actionable feedback for the farmer. Do not include dosage recommendations, only feedback and suggestions for soil improvement or maintenance.
+Soil data: {', '.join(f'{k}: {v}' for k, v in soil_data.items())}
+Feedback:"""
+    try:
+        model = genai.GenerativeModel("gemini-2.5-flash")
+        response = model.generate_content(prompt)
+        feedback = response.text if hasattr(response, 'text') else None
+        if not feedback:
+            feedback = "Sorry, I couldn't generate feedback."
+        return jsonify({'feedback': feedback})
+    except Exception as e:
+        # Fallback response
+        soil_str = ', '.join(f"{k}: {v}" for k, v in soil_data.items())
+        feedback = (
+            f"[Gemini error: {e}]\n"
+            f"Current soil data: {soil_str}.\n"
+            f"(This is a fallback feedback response.)"
+        )
+        return jsonify({'feedback': feedback})
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
