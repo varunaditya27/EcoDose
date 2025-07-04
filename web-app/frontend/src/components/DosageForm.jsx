@@ -36,27 +36,52 @@ const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
     }
   }, [form, soilDataSaved, onSoilDataComplete]);
 
-  const validate = () => {
+  const validateField = (name, value) => {
+    let error;
+    const num = parseFloat(value);
+    switch (name) {
+      case 'ph':
+        if (isNaN(num) || num < 3 || num > 12) error = 'pH must be between 3 and 12.';
+        break;
+      case 'moisture':
+        if (isNaN(num) || num < 0 || num > 100) error = 'Moisture must be 0-100%.';
+        break;
+      case 'n':
+        if (isNaN(num) || num < 0 || num > 1000) error = 'N must be 0-1000 mg/kg.';
+        break;
+      case 'p':
+        if (isNaN(num) || num < 0 || num > 1000) error = 'P must be 0-1000 mg/kg.';
+        break;
+      case 'k':
+        if (isNaN(num) || num < 0 || num > 1000) error = 'K must be 0-1000 mg/kg.';
+        break;
+      case 'crop':
+        if (!value) error = 'Select a crop type.';
+        break;
+      case 'model':
+        if (!value) error = 'Select a prediction model.';
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
+  const validate = (formToValidate = form) => {
     const newErrors = {};
-    const ph = parseFloat(form.ph);
-    const moisture = parseFloat(form.moisture);
-    const n = parseFloat(form.n);
-    const p = parseFloat(form.p);
-    const k = parseFloat(form.k);
-    if (isNaN(ph) || ph < 3 || ph > 12) newErrors.ph = 'pH must be between 3 and 12.';
-    if (isNaN(moisture) || moisture < 0 || moisture > 100) newErrors.moisture = 'Moisture must be 0-100%.';
-    if (isNaN(n) || n < 0 || n > 1000) newErrors.n = 'N must be 0-1000 mg/kg.';
-    if (isNaN(p) || p < 0 || p > 1000) newErrors.p = 'P must be 0-1000 mg/kg.';
-    if (isNaN(k) || k < 0 || k > 1000) newErrors.k = 'K must be 0-1000 mg/kg.';
-    if (!form.crop) newErrors.crop = 'Select a crop type.';
-    if (!form.model) newErrors.model = 'Select a prediction model.';
+    Object.keys(formToValidate).forEach((key) => {
+      const error = validateField(key, formToValidate[key]);
+      if (error) newErrors[key] = error;
+    });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: undefined });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    // Validate this field immediately
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   const handleSubmit = async (e) => {
