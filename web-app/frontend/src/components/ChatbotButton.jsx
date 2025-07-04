@@ -83,6 +83,11 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
     setLoading(false);
   };
 
+  const handleClick = () => {
+    if (!enabled) return;
+    setOpen(true);
+  };
+
   return (
     <>
       {/* Only show FAB and tooltip when sidebar is not open */}
@@ -90,12 +95,20 @@ const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
         <>
           <button
             className={`chatbot-fab${enabled ? '' : ' chatbot-fab-disabled'}`}
-            onClick={() => enabled && setOpen(true)}
+            onClick={handleClick}
             onMouseEnter={() => !enabled && setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
-            disabled={!enabled}
             aria-label="Open EcoDose Assistant"
-            style={{ position: 'fixed', bottom: '2.5rem', right: '2.5rem', zIndex: 200 }}
+            tabIndex={0}
+            style={{
+              position: 'fixed',
+              bottom: '2.5rem',
+              right: '2.5rem',
+              zIndex: 200,
+              opacity: enabled ? 1 : 0.6,
+              cursor: enabled ? 'pointer' : 'not-allowed',
+              pointerEvents: 'auto', // Always allow pointer events for hover
+            }}
           >
             <span role="img" aria-label="chat">💬</span>
           </button>
