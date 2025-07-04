@@ -1,0 +1,25 @@
+.footer {
+  background: #e6e2d3;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+  margin-top: 2rem;
+}
+.footer-content nav {
+  margin-bottom: 0.7rem;
+}
+.footer-link {
+  color: #3a5a40;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #588157;
+}
+.footer-note {
+  color: #6c757d;
+  font-size: 0.98rem;
+  margin-top: 0.5rem;
+} 

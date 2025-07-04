@@ -1,4 +1,5 @@
 import React from 'react';
+import './WhyDosageMatters.css';
 
 const WhyDosageMatters = () => (
   <div className="about-card why-dosage">

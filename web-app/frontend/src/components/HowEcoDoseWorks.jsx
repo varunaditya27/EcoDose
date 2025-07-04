@@ -1,4 +1,5 @@
 import React from 'react';
+import './HowEcoDoseWorks.css';
 
 const HowEcoDoseWorks = () => (
   <div className="about-card">

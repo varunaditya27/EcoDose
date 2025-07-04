@@ -1,4 +1,5 @@
 import React from 'react';
+import './WhyEcoDose.css';
 
 const WhyEcoDose = () => (
   <section className="why-ecodose" id="why-ecodose">

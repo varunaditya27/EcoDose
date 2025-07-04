@@ -1,3 +1,4 @@
+/* Cleaned: Only global/layout/sidebar/chatbot styles remain. Component styles moved to their own files. */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -18,10 +19,6 @@
 .card:hover {
   box-shadow: 0 8px 32px #3a5a4022;
 }
-
-/* Remove Vite/React demo logo styles */
-
-/* Add more section/component styles as needed */
 
 /* Sidebar styles */
 .sidebar {

@@ -6,6 +6,7 @@ import WhatsNext from './WhatsNext';
 import WhatIsRhizobium from './WhatIsRhizobium';
 import WhyDosageMatters from './WhyDosageMatters';
 import WhyUseAI from './WhyUseAI';
+import './About.css';
 
 const About = () => (
   <section className="about" id="about">

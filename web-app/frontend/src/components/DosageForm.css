@@ -1,0 +1,101 @@
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem 1rem 1rem;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.3rem;
+}
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #3a5a40;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.input-group .icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+.input-group .npk-group {
+  display: flex;
+  gap: 0.7rem;
+}
+.input-group .npk-group input {
+  flex: 1;
+}
+input, select {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #b7b7b7;
+  font-size: 1rem;
+  background: #f7f3ed;
+  margin-top: 0.1rem;
+  color: #2e3d27;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus {
+  border: 1.5px solid #588157;
+  outline: none;
+  box-shadow: 0 0 0 2px #a3b18a55;
+}
+.submit-btn {
+  background: #588157;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 0.7rem;
+  box-shadow: 0 2px 8px #58815733;
+  transition: background 0.2s, transform 0.2s;
+}
+.submit-btn:hover {
+  background: #3a5a40;
+  transform: translateY(-2px) scale(1.04);
+}
+.submit-btn:disabled {
+  background: #b7b7b7;
+  color: #eee;
+  cursor: not-allowed;
+}
+.input-error {
+  color: #c0392b;
+  font-size: 0.98rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+.npk-errors {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.2rem;
+}
+.npk-errors .input-error {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.toast.soil-toast {
+  position: fixed;
+  bottom: 7.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e6e2d3;
+  color: #3a5a40;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px #3a5a4011;
+  z-index: 250;
+  animation: toast-in 0.2s;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+} 

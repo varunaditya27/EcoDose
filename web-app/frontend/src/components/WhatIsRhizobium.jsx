@@ -1,4 +1,5 @@
 import React from 'react';
+import './WhatIsRhizobium.css';
 
 const WhatIsRhizobium = () => (
   <div className="about-card what-is-rhizobium">

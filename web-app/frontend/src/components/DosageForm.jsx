@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './DosageForm.css';
 
 const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
   const [form, setForm] = useState({

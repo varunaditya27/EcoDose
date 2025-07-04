@@ -1,4 +1,5 @@
 import React from 'react';
+import './Result.css';
 
 const Result = ({ dosage, error, aiFeedback, aiFeedbackLoading }) => {
   if (error) {

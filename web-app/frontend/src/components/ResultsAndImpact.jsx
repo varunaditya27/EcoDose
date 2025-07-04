@@ -1,4 +1,5 @@
 import React from 'react';
+import './ResultsAndImpact.css';
 
 const ResultsAndImpact = () => (
   <div className="about-card results-impact">

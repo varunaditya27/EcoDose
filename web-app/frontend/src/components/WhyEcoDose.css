@@ -1,0 +1,33 @@
+.why-ecodose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem 1.5rem 1rem;
+}
+.why-ecodose-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #3a5a4011;
+  padding: 2.5rem 2rem;
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto 2rem auto;
+  text-align: left;
+}
+.why-ecodose-card h2 {
+  color: #3a5a40;
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.why-ecodose-card p {
+  font-size: 1.13rem;
+  color: #2e3d27;
+  line-height: 1.7;
+  margin-bottom: 0.7rem;
+} 

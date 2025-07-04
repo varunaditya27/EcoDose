@@ -1,4 +1,5 @@
 import React from 'react';
+import './WhatsNext.css';
 
 const WhatsNext = () => (
   <div className="about-card whats-next">

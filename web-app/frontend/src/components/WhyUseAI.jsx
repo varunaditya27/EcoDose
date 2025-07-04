@@ -1,4 +1,5 @@
 import React from 'react';
+import './WhyUseAI.css';
 
 const WhyUseAI = () => (
   <div className="about-card why-ai">

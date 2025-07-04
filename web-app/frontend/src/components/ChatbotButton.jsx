@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import './ChatbotButton.css';
 
 const ChatbotButton = ({ enabled, soilData, open, setOpen }) => {
   const [showTooltip, setShowTooltip] = useState(false);
