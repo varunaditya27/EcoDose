@@ -34,4 +34,35 @@
   border-radius: 8px;
   border: 1px solid #e1e4e8;
   text-align: left;
+}
+.ai-feedback-text-with-tts {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+.tts-btn {
+  background: none;
+  border: none;
+  color: #3a5a40;
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.tts-btn:hover, .tts-btn:focus {
+  background: #e6e2d3;
+  outline: none;
+}
+@media (max-width: 600px) {
+  .ai-feedback-text-with-tts {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+  }
+  .tts-btn {
+    align-self: flex-start;
+    margin-top: 0.2em;
+  }
 } 
