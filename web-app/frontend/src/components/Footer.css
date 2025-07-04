@@ -22,4 +22,58 @@
   color: #6c757d;
   font-size: 0.98rem;
   margin-top: 0.5rem;
+}
+.footer-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(40, 60, 40, 0.25);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-modal {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px #3a5a4044;
+  max-width: 420px;
+  width: 90vw;
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
+  position: relative;
+  text-align: left;
+  animation: fadeIn 0.2s;
+}
+.footer-modal h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #3a5a40;
+  font-weight: 700;
+}
+.footer-modal-text {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  color: #222;
+  margin: 1.1rem 0 1.5rem 0;
+  line-height: 1.6;
+}
+.footer-modal-close {
+  background: #3a5a40;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  cursor: pointer;
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  transition: background 0.15s;
+}
+.footer-modal-close:hover, .footer-modal-close:focus {
+  background: #588157;
+  outline: none;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
 } 
