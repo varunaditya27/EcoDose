@@ -1,8 +1,23 @@
 .why-ai {
   margin-top: 2rem;
+  text-align: left;
 }
-.why-ai h4 {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  color: #3a3a3a;
+.ai-para {
+  font-size: 1.13rem;
+  color: #2e3d27;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  margin-top: 0;
+}
+.ai-subhead {
+  margin-top: 1.7rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.25rem;
+  color: #3a5a40;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .why-ai {
+    padding: 0.7rem 0.2rem;
+  }
 } 

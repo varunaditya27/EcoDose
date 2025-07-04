@@ -17,7 +17,7 @@
 .why-ecodose-card h2 {
   color: #3a5a40;
   font-size: 2rem;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.1rem;
   margin-top: 0;
   font-weight: 800;
   letter-spacing: 1px;
@@ -25,9 +25,24 @@
   align-items: center;
   gap: 0.5rem;
 }
-.why-ecodose-card p {
+.why-para {
   font-size: 1.13rem;
   color: #2e3d27;
   line-height: 1.7;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.1rem;
+  margin-top: 0;
+}
+.why-questions {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
+  color: #3a5a40;
+}
+@media (max-width: 600px) {
+  .why-ecodose-card {
+    padding: 1.2rem 0.7rem;
+  }
+  .why-ecodose {
+    padding: 1.5rem 0.2rem 1rem 0.2rem;
+  }
 } 

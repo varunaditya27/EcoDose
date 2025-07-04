@@ -1,16 +1,33 @@
 .results-impact {
   margin-top: 2rem;
+  text-align: left;
+}
+.results-para {
+  font-size: 1.13rem;
+  color: #2e3d27;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  margin-top: 0;
+}
+.results-subhead {
+  font-size: 1.25rem;
+  color: #3a5a40;
+  font-weight: 700;
+  margin-top: 1.7rem;
+  margin-bottom: 0.7rem;
 }
 .custom-list {
   margin-top: 0.5rem;
   padding-left: 1.5rem;
   line-height: 1.7;
   list-style: none;
+  margin-bottom: 1.1rem;
 }
 .custom-list li {
   position: relative;
   margin-bottom: 0.75rem;
   padding-left: 1rem;
+  font-size: 1.08rem;
 }
 .custom-list li::before {
   content: "•";
@@ -38,4 +55,9 @@
   margin-top: 0.7rem;
   font-size: 0.98rem;
   color: #555;
+}
+@media (max-width: 600px) {
+  .results-impact {
+    padding: 0.7rem 0.2rem;
+  }
 } 

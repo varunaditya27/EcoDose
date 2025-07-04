@@ -1,3 +1,23 @@
 .what-is-rhizobium {
   margin-top: 2rem;
+  text-align: left;
+}
+.rhizo-para {
+  font-size: 1.13rem;
+  color: #2e3d27;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  margin-top: 0;
+}
+.rhizo-subhead {
+  font-size: 1.25rem;
+  color: #3a5a40;
+  font-weight: 700;
+  margin-top: 1.7rem;
+  margin-bottom: 0.7rem;
+}
+@media (max-width: 600px) {
+  .what-is-rhizobium {
+    padding: 0.7rem 0.2rem;
+  }
 } 

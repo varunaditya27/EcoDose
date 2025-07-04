@@ -4,9 +4,11 @@ import './Footer.css';
 const Footer = () => (
   <footer className="footer">
     <div className="footer-content">
-      <nav>
-        <a href="#" className="footer-link">Privacy Policy</a> |
-        <a href="#" className="footer-link">Terms of Use</a> |
+      <nav className="footer-nav">
+        <a href="#" className="footer-link">Privacy Policy</a>
+        <span className="footer-sep">|</span>
+        <a href="#" className="footer-link">Terms of Use</a>
+        <span className="footer-sep">|</span>
         <a href="https://github.com/varunaditya27/EcoDose" target="_blank" rel="noopener" className="footer-link">GitHub Repository</a>
       </nav>
       <div className="footer-note">
