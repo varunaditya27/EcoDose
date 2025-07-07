@@ -17,7 +17,7 @@ const HowEcoDoseWorks = () => (
     </ol>
     <h3 className="how-subhead">🧠 Model Details</h3>
     <ul className="custom-list">
-      <li><strong>Training Data:</strong> Simulated but realistic values modeled after GKVK field conditions</li>
+      <li><strong>Training Data:</strong> Modeled after GKVK field conditions</li>
       <li><strong>Features Used:</strong> pH, Moisture (%), Nitrogen (mg/kg), Phosphorus (mg/kg), Potassium (mg/kg)</li>
       <li><strong>Target Variable:</strong> Dosage of biofertilizer (g/m²)</li>
       <li><strong>Models Compared:</strong> Random Forest (primary), Linear Regression (baseline)</li>
