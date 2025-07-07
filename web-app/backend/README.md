@@ -1,32 +1,28 @@
-# EcoDose: AI-Powered Biofertilizer Assistant
+# EcoDose Backend
 
-EcoDose is a web application that helps farmers and agri-enthusiasts optimize crop yield using Rhizobium-based biofertilizers. By leveraging real-time soil data and machine learning models, EcoDose recommends the ideal dosage of biofertilizer beads (g/m²) for your unique soil and crop profile.
+This is the backend for [EcoDose](../../README.md), an AI-powered platform to optimize crop yield using Rhizobium-based biofertilizers. The backend provides REST APIs for dosage prediction, AI-based soil analysis, and a context-aware chatbot, leveraging machine learning and Google Gemini.
 
 ## Features
-- Predicts optimal biofertilizer dosage using AI (Random Forest and Linear Regression models)
-- User-friendly web interface built with Flask
-- Inputs: Soil pH, moisture, NPK (Nitrogen, Phosphorus, Potassium) levels, and crop type
-- Modern, responsive UI with clear dosage recommendations
-- Future-ready: Vision for mobile support, NLP for rural languages, and automation
+- Predicts optimal biofertilizer dosage using Random Forest or Linear Regression models
+- AI-powered soil analysis and actionable feedback (Gemini API)
+- Context-aware chatbot for agri-queries (Gemini API)
+- CORS enabled for frontend integration
 
-## How It Works
-1. User enters soil parameters and selects a prediction model.
-2. The backend loads pre-trained ML models (`random_forest_model.pkl`, `linear_model.pkl`) and predicts the recommended dosage.
-3. The result is displayed in a visually appealing format.
+## Endpoints
+- `POST /predict` — Predicts dosage (g/m²) from soil data and selected model
+- `POST /api/chat` — Chatbot endpoint, returns context-aware agri-advice
+- `POST /api/soil-feedback` — Returns AI-generated soil health feedback (no dosage)
 
 ## Project Structure
 ```
-├── app.py                  # Flask backend
-├── requirements.txt        # Python dependencies
-├── models/                 # Pre-trained ML models
+web-app/backend/
+├── app.py              # Flask backend (API, ML, Gemini integration)
+├── requirements.txt    # Python dependencies
+├── .env                # Environment variables (not committed)
+├── models/             # Pre-trained ML models (.pkl)
 │   ├── linear_model.pkl
 │   └── random_forest_model.pkl
-├── static/
-│   ├── script.js           # Frontend JS
-│   └── style.css           # Custom styles
-├── templates/
-│   └── index.html          # Main HTML template
-└── prompt.txt              # (Optional) Project prompt/notes
+└── README.md           # (This file)
 ```
 
 ## Getting Started
@@ -36,38 +32,73 @@ EcoDose is a web application that helps farmers and agri-enthusiasts optimize cr
 - pip
 
 ### Installation
-1. Clone this repository:
+1. Clone the repository and navigate to the backend:
    ```sh
    git clone https://github.com/varunaditya27/EcoDose.git
-   cd EcoDose
+   cd EcoDose/web-app/backend
    ```
 2. Install dependencies:
    ```sh
    pip install -r requirements.txt
    ```
-3. Ensure the `models/` directory contains the required `.pkl` model files.
-4. Run the Flask app:
+3. Ensure the `models/` directory contains `random_forest_model.pkl` and `linear_model.pkl`.
+4. Create a `.env` file with your Gemini API key:
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
+5. Run the Flask app:
    ```sh
    python app.py
    ```
-5. Open your browser and go to `http://localhost:5001`
+6. The API will be available at `http://localhost:5001`
 
-## Usage
-- Fill in the soil parameters and select a model.
-- Click "Calculate Dosage" to get your recommendation.
+## API Usage
+### Predict Dosage
+`POST /predict`
+```json
+{
+  "pH": 7.2,
+  "moisture": 30,
+  "nitrogen": 120,
+  "phosphorus": 40,
+  "potassium": 60,
+  "model": "random_forest" // or "linear"
+}
+```
+Returns: `{ "dosage": 12.34 }`
+
+### Chatbot
+`POST /api/chat`
+```json
+{
+  "message": "How do I improve my soil?",
+  "soil_data": { ... },
+  "history": [ ... ]
+}
+```
+Returns: `{ "reply": "..." }`
+
+### Soil Feedback
+`POST /api/soil-feedback`
+```json
+{
+  "pH": 7.2,
+  "moisture": 30,
+  "nitrogen": 120,
+  "phosphorus": 40,
+  "potassium": 60
+}
+```
+Returns: `{ "feedback": "..." }`
 
 ## Tech Stack
 - Python, Flask
-- scikit-learn (for model training, not included here)
-- HTML, CSS, JavaScript (Vanilla)
-
-## Future Vision
-- Mobile app support
-- NLP for rural languages
-- Automated sensor integration
+- scikit-learn (joblib for model loading)
+- Google Gemini API
+- numpy, python-dotenv, flask-cors
 
 ## License
-This project is for academic and educational purposes.
+This project is licensed under the [MIT License](../../LICENSE).
 
 ---
-© 2025 EcoDose. Built by 1st year engineering students at RVCE.
+© 2025 EcoDose Project. Built by 1st year engineering students at RVCE.
