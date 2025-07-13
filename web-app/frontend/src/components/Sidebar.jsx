@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import logo from '/logo.png';
 import { FaHome, FaFlask, FaInfoCircle, FaRobot, FaBars, FaLeaf, FaUsers, FaCogs, FaChartBar, FaLightbulb, FaSeedling, FaQuestionCircle, FaBrain } from 'react-icons/fa';
 import './Sidebar.css';
 
@@ -62,8 +63,7 @@ const Sidebar = () => {
     <>
       <aside className={`sidebar${open ? ' open' : ''}`} aria-label="Sidebar Navigation">
         <div className="sidebar-logo">
-          <FaLeaf className="sidebar-logo-icon" aria-label="EcoDose leaf" />
-          <span className="sidebar-logo-text">EcoDose</span>
+          <img src={logo} alt="EcoDose Logo" className="sidebar-logo-img" />
         </div>
         <nav className="sidebar-nav" role="navigation">
           {navLinks.map(link => (

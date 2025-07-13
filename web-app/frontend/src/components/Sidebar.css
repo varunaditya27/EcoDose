@@ -1,3 +1,10 @@
+/* Constrain the sidebar logo image for proper fit */
+.sidebar-logo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 1rem auto;
+}
 /* Sidebar styles */
 .sidebar {
   position: fixed;
