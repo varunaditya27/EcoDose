@@ -90,7 +90,7 @@ const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
     setLoading(true);
     onResult(null, null);
     try {
-      const res = await fetch('http://localhost:5001/predict', {
+      const res = await fetch('https://ecodose.onrender.com/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -27,7 +27,7 @@ function App() {
     if (result && soilData) {
       setAiFeedbackLoading(true)
       try {
-        const res = await fetch('http://localhost:5001/api/soil-feedback', {
+        const res = await fetch('https://ecodose.onrender.com/api/soil-feedback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
