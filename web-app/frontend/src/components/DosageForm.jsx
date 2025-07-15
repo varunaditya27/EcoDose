@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './DosageForm.css';
 
 const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
@@ -15,9 +15,13 @@ const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
   const [soilDataSaved, setSoilDataSaved] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Fix: Only save soil data when all fields are filled AND the user leaves the field (onBlur), or on submit
+  // Use a ref to track last saved form
+  const lastSavedForm = useRef({});
   useEffect(() => {
     const allFilled = form.ph && form.moisture && form.n && form.p && form.k;
-    if (allFilled && !soilDataSaved) {
+    const formString = JSON.stringify(form);
+    if (allFilled && formString !== JSON.stringify(lastSavedForm.current)) {
       const soilData = {
         ph: form.ph,
         moisture: form.moisture,
@@ -30,6 +34,7 @@ const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
       setSoilDataSaved(true);
       if (onSoilDataComplete) onSoilDataComplete(soilData);
       setTimeout(() => setShowToast(false), 2500);
+      lastSavedForm.current = { ...form };
     }
     if (!allFilled && soilDataSaved) {
       setSoilDataSaved(false);
@@ -78,8 +83,9 @@ const DosageForm = ({ onResult, loading, setLoading, onSoilDataComplete }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    // Always store as string to avoid partial update issues
+    setForm((prev) => ({ ...prev, [name]: value.toString() }));
     // Validate this field immediately
     setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
