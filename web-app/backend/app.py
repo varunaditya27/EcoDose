@@ -152,5 +152,9 @@ def soil_feedback():
         )
         return jsonify({'feedback': feedback})
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'ok', 'message': 'EcoDose backend is running smoothly.'})
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
